@@ -1,0 +1,21 @@
+{
+    "name": "subbysnake/max-upload-file-size",
+    "description": "Gets maximum of upload file size.",
+    "keywords": ["upload", "file", "size"],
+    "type": "package",
+    "license": "MIT",
+    "homepage": "https://github.com/subbysnake/MaxUploadFileSize",
+    "authors": [
+        {
+            "name": "Szabolcs Surányi",
+            "email": "szabolcs.suranyi@shadesoft.hu",
+            "homepage": "http://shadesoft.hu"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "SubbySnake\\MaxUploadFileSize\\": "" }
+    },
+    "require": {
+        "php": ">=5.3"
+    }
+}
