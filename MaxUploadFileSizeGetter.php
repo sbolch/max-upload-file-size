@@ -29,7 +29,7 @@ class MaxUploadFileSizeGetter {
             $maxSize = floor($maxSize / pow(1024, stripos($this->units, $unit[0])));
         } else {
             $i = 0;
-            while($maxSize > 1024) {
+            while($maxSize >= 1024) {
                 $maxSize /= 1024;
                 $i++;
             }

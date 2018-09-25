@@ -18,6 +18,9 @@ of the Composer documentation.
 ## Usage
 
 ```php
-$hash = \SubbySnake\MaxUploadFileSize\MaxUploadFileSizeGetter::get();	    // max upload file size rounded (down) with automatic unit
-$hash = \SubbySnake\MaxUploadFileSize\MaxUploadFileSizeGetter::get('KB');	// max upload file size rounded (down) in KB
+$hash = (new \SubbySnake\MaxUploadFileSize\MaxUploadFileSizeGetter)->get();
+// max upload file size rounded (down) with automatic unit
+
+$hash = (new \SubbySnake\MaxUploadFileSize\MaxUploadFileSizeGetter)->get('KB');
+// max upload file size rounded (down) in KB
 ```
