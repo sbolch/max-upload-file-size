@@ -52,7 +52,7 @@ class MaxUploadFileSizeGetter {
         }
 
         return number_format($maxSize, $this->decimals, $this->decimalPoint, $this->thousandsSeparator)
-            . ($showUnit ? " {$unit}" : '');
+            . ($this->showUnit ? " {$unit}" : '');
     }
 
     /**
