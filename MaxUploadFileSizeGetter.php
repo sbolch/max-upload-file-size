@@ -4,10 +4,20 @@ namespace SubbySnake\MaxUploadFileSize;
 
 class MaxUploadFileSizeGetter {
     private $units = 'bkmgtpezy';
+    private
+        $format,
+        $decimals,
+        $decimalPoint,
+        $thousandsSeparator,
+        $showUnit;
+
+    public function __construct() {
+        $this->format = false;
+    }
 
     /**
      * @param null|string $unit
-     * @return string
+     * @return int|string
      */
     public function get($unit = null) {
         $maxSize = 0;
@@ -22,7 +32,7 @@ class MaxUploadFileSizeGetter {
         }
 
         if($maxSize == 0) {
-            return 'unlimited';
+            return $this->format ? 'unlimited' : 0;
         }
 
         if($unit) {
@@ -37,7 +47,28 @@ class MaxUploadFileSizeGetter {
             $unit = strtoupper(str_replace('bb', 'b', $this->units[$i] . 'b'));
         }
 
-        return number_format($maxSize, 0, ',', ' ') . " {$unit}";
+        if(!$this->format) {
+            return $maxSize;
+        }
+
+        return number_format($maxSize, $this->decimals, $this->decimalPoint, $this->thousandsSeparator)
+            . ($showUnit ? " {$unit}" : '');
+    }
+
+    /**
+     * @param int $decimals
+     * @param string $decimalPoint
+     * @param string $thousandsSeparator
+     * @param bool $showUnit
+     * @return MaxUploadFileSizeGetter
+     */
+    public function setFormat($decimals = 0, $decimalPoint = '.', $thousandsSeparator = ',', $showUnit = false) {
+        $this->format = true;
+        $this->decimals = $decimals;
+        $this->decimalPoint = $decimalPoint;
+        $this->thousandsSeparator = $thousandsSeparator;
+        $this->showUnit = $showUnit;
+        return $this;
     }
 
     private function parseSize($size) {
