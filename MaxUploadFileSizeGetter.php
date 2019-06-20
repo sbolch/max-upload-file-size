@@ -1,6 +1,6 @@
 <?php
 
-namespace SubbySnake\MaxUploadFileSize;
+namespace d3vy\MaxUploadFileSize;
 
 class MaxUploadFileSizeGetter {
     private $units = 'bkmgtpezy';

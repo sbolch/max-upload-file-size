@@ -1,10 +1,10 @@
 {
-    "name": "subbysnake/max-upload-file-size",
+    "name": "d3vy/max-upload-file-size",
     "description": "Gets maximum of upload file size.",
     "keywords": ["upload", "file", "size"],
     "type": "package",
     "license": "MIT",
-    "homepage": "https://github.com/subbysnake/MaxUploadFileSize",
+    "homepage": "https://github.com/d3vy/MaxUploadFileSize",
     "authors": [
         {
             "name": "Szabolcs Surányi",
@@ -13,7 +13,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "SubbySnake\\MaxUploadFileSize\\": "" }
+        "psr-4": { "d3vy\\MaxUploadFileSize\\": "" }
     },
     "require": {
         "php": ">=5.3"
