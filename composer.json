@@ -4,7 +4,7 @@
     "keywords": ["upload", "file", "size"],
     "type": "package",
     "license": "MIT",
-    "homepage": "https://github.com/d3vy/MaxUploadFileSize",
+    "homepage": "https://github.com/d3vy/max-upload-file-size",
     "authors": [
         {
             "name": "Szabolcs Surányi",
