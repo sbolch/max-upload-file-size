@@ -1,21 +1,21 @@
 {
-    "name": "d3vy/max-upload-file-size",
+    "name": "sbolch/max-upload-file-size",
     "description": "Gets maximum of upload file size.",
     "keywords": ["upload", "file", "size"],
     "type": "package",
     "license": "MIT",
-    "homepage": "https://github.com/d3vy/max-upload-file-size",
+    "homepage": "https://github.com/sbolch/max-upload-file-size",
     "authors": [
         {
             "name": "Szabolcs Surányi",
             "email": "szabolcs.suranyi@shadesoft.hu",
-            "homepage": "http://shadesoft.hu"
+            "homepage": "https://shadesoft.dev"
         }
     ],
     "autoload": {
-        "psr-4": { "d3vy\\MaxUploadFileSize\\": "" }
+        "psr-4": { "sbolch\\MaxUploadFileSize\\": "" }
     },
     "require": {
-        "php": ">=5.3"
+        "php": ">=7.4"
     }
 }

@@ -1,25 +1,24 @@
 <?php
 
-namespace d3vy\MaxUploadFileSize;
+namespace sbolch\MaxUploadFileSize;
 
 class MaxUploadFileSizeGetter {
-    private $units = 'bkmgtpezy';
-    private
-        $format,
-        $decimals,
-        $decimalPoint,
-        $thousandsSeparator,
-        $showUnit;
+    private const UNITS = 'bkmgtpezy';
+
+    private bool $format;
+    private string $decimals;
+    private string $decimalPoint;
+    private string $thousandsSeparator;
+    private bool $showUnit;
 
     public function __construct() {
         $this->format = false;
     }
 
     /**
-     * @param null|string $unit
      * @return int|string
      */
-    public function get($unit = null) {
+    public function get(string $unit = null) {
         $maxSize = 0;
 
         $postMaxSize = $this->parseSize(ini_get('post_max_size'));
@@ -27,7 +26,7 @@ class MaxUploadFileSizeGetter {
 
         if($uploadMaxSize > 0 && ($uploadMaxSize <= $postMaxSize || $postMaxSize == 0)) {
             $maxSize = $uploadMaxSize;
-        } elseif($postMaxSize > 0 && ($postMaxSize <= $uploadMaxSize || $uploadMaxSize = 0)) {
+        } elseif($postMaxSize > 0 && ($postMaxSize <= $uploadMaxSize || $uploadMaxSize == 0)) {
             $maxSize = $postMaxSize;
         }
 
@@ -36,7 +35,7 @@ class MaxUploadFileSizeGetter {
         }
 
         if($unit) {
-            $maxSize = floor($maxSize / pow(1024, stripos($this->units, $unit[0])));
+            $maxSize = floor($maxSize / pow(1024, stripos(self::UNITS, $unit[0])));
         } else {
             $i = 0;
             while($maxSize >= 1024) {
@@ -44,7 +43,7 @@ class MaxUploadFileSizeGetter {
                 $i++;
             }
             $maxSize = floor($maxSize);
-            $unit = strtoupper(str_replace('bb', 'b', $this->units[$i] . 'b'));
+            $unit = strtoupper(str_replace('bb', 'b', self::UNITS . 'b'));
         }
 
         if(!$this->format) {
@@ -52,17 +51,10 @@ class MaxUploadFileSizeGetter {
         }
 
         return number_format($maxSize, $this->decimals, $this->decimalPoint, $this->thousandsSeparator)
-            . ($this->showUnit ? " {$unit}" : '');
+            . ($this->showUnit ? " $unit" : '');
     }
 
-    /**
-     * @param int $decimals
-     * @param string $decimalPoint
-     * @param string $thousandsSeparator
-     * @param bool $showUnit
-     * @return MaxUploadFileSizeGetter
-     */
-    public function setFormat($decimals = 0, $decimalPoint = '.', $thousandsSeparator = ',', $showUnit = false) {
+    public function setFormat(int $decimals = 0, string $decimalPoint = '.', string $thousandsSeparator = ',', bool $showUnit = false): self {
         $this->format = true;
         $this->decimals = $decimals;
         $this->decimalPoint = $decimalPoint;
@@ -73,10 +65,10 @@ class MaxUploadFileSizeGetter {
 
     private function parseSize($size) {
         $unit = preg_replace('/[^bkmgtpezy]/i', '', $size);
-        $size = preg_replace('/[^0-9\.]/', '', $size);
+        $size = preg_replace('/\D/', '', $size);
 
         if($unit) {
-            return floor($size * pow(1024, stripos($this->units, $unit[0])));
+            return floor($size * pow(1024, stripos(self::UNITS, $unit[0])));
         } else {
             return floor($size);
         }
