@@ -8,8 +8,7 @@
     "authors": [
         {
             "name": "Szabolcs Surányi",
-            "email": "szabolcs.suranyi@shadesoft.hu",
-            "homepage": "https://shadesoft.dev"
+            "email": "arnyek@arnyek.hu"
         }
     ],
     "autoload": {
