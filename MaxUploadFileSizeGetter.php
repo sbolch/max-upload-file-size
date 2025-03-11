@@ -19,18 +19,12 @@ class MaxUploadFileSizeGetter {
      * @return int|string
      */
     public function get(string $unit = null) {
-        $maxSize = 0;
+        $maxSize = min(
+            $this->parseSize(ini_get('post_max_size')) ?: PHP_INT_MAX,
+            $this->parseSize(ini_get('upload_max_filesize')) ?: PHP_INT_MAX,
+        );
 
-        $postMaxSize = $this->parseSize(ini_get('post_max_size'));
-        $uploadMaxSize = $this->parseSize(ini_get('upload_max_filesize'));
-
-        if($uploadMaxSize > 0 && ($uploadMaxSize <= $postMaxSize || $postMaxSize == 0)) {
-            $maxSize = $uploadMaxSize;
-        } elseif($postMaxSize > 0 && ($postMaxSize <= $uploadMaxSize || $uploadMaxSize == 0)) {
-            $maxSize = $postMaxSize;
-        }
-
-        if($maxSize == 0) {
+        if($maxSize == PHP_INT_MAX) {
             return $this->format ? 'unlimited' : 0;
         }
 
@@ -43,7 +37,7 @@ class MaxUploadFileSizeGetter {
                 $i++;
             }
             $maxSize = floor($maxSize);
-            $unit = strtoupper(str_replace('bb', 'b', self::UNITS . 'b'));
+            $unit = strtoupper(str_replace('bb', 'b', self::UNITS[$i] . 'b'));
         }
 
         if(!$this->format) {
